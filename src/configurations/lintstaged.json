@@ -1,0 +1,12 @@
+{
+  "*.{js,js,ts,tsx}": [
+    "eslint --fix --max-warnings 0",
+    "prettier --write",
+    "cross-env CI=true npm run test --if-present  -- --findRelatedTests --bail"
+  ],
+  "*.{css,scss,sass}": [
+    "stylelint --fix --max-warnings 0",
+    "prettier --write"
+  ],
+  "*.{html,json,md,mdx,yml,yaml}": "prettier --write"
+}
