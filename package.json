@@ -34,7 +34,7 @@
     "ansi-colors": "^4.1.1",
     "enquirer": "^2.3.6",
     "fs-extra": "^10.0.0",
-    "inquirer": "^8.2.0"
+    "nanospinner": "^1.0.0"
   },
   "devDependencies": {
     "@types/fs-extra": "^9.0.13",
