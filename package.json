@@ -16,7 +16,7 @@
     "prebuild": "rimraf dist",
     "build": "babel src --out-dir dist --extensions \".ts\"",
     "postbuild": "copyfiles --exclude \"**/*.ts\" --all --flat src/configurations/* dist/configurations",
-    "release": "np"
+    "release": "np --no-tests"
   },
   "repository": {
     "type": "git",
