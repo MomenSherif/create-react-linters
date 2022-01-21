@@ -1,0 +1,19 @@
+{
+  "presets": ["@babel/preset-env", "@babel/preset-typescript"],
+  "plugins": [
+    "@babel/plugin-transform-runtime",
+    [
+      "module-resolver",
+      {
+        "alias": {
+          "@configurations": "./src/configurations",
+          "@generators": "./src/generators",
+          "@prompts": "./src/prompts",
+          "@types": "./src/types",
+          "@utils": "./src/utils",
+          "@constants": "./src/constants"
+        }
+      }
+    ]
+  ]
+}
