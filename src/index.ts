@@ -1,3 +1,5 @@
+#!/usr/bin/env node
+
 import c from 'ansi-colors';
 
 import { availableConfigs } from '@configurations';
