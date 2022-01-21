@@ -21,8 +21,8 @@ export default async function configListPrompt() {
     symbols: {
       indicator: function () {
         return {
-          on: primaryColor(c.symbols.check),
-          off: c.gray(c.symbols.check),
+          on: c.green('✔'),
+          off: c.gray('✔'),
         };
       },
     },
