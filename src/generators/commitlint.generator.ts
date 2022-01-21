@@ -1,7 +1,14 @@
 import fse from 'fs-extra';
+import c from 'ansi-colors';
+import pkgManager from '@utils/pkgManager';
 
 export default async function commitlintConfigGenerator() {
-  console.log('Commitlint start');
+  console.log(c.blue('\nConfiguring Commitlint 🔨 🔨'));
+
+  await pkgManager.install([
+    '@commitlint/cli',
+    '@commitlint/config-conventional',
+  ]);
 
   await fse.writeJSON(
     '.commitlintrc.json',
@@ -11,5 +18,5 @@ export default async function commitlintConfigGenerator() {
     { spaces: 2 },
   );
 
-  console.log('Commitlint end');
+  console.log(c.blue('Commitlint successfully configured 🎉 🎉'));
 }

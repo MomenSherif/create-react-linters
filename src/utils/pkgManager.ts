@@ -1,7 +1,7 @@
 import { execSync } from 'child_process';
 import c from 'ansi-colors';
-import { createSpinner } from 'nanospinner';
 import fse from 'fs-extra';
+
 import { primaryColor } from '@prompts/shared';
 
 interface InstallOptions {
@@ -16,7 +16,6 @@ const defaultInstallOptions: InstallOptions = {
 
 class PackageManager {
   private isNpm = this.detectIsUsingNpm();
-  private spinner = createSpinner();
 
   async install(
     deps: string | string[],
@@ -43,17 +42,18 @@ class PackageManager {
         .join(' ');
     }
 
-    this.spinner.start({
-      text: `Installing 🚀 ${packages}`,
-    });
-    // await execSync(command, { stdio: 'inherit' });
-    this.spinner.success({
-      text: c.green(`Installed Successfully 🚀 ${primaryColor(packages)}`),
-    });
+    console.log(`\n🚀 ${primaryColor('Installing')} ${packages}\n`);
+
+    await execSync(command, { stdio: 'inherit' });
+
+    console.log(
+      c.green(`\n✔ Installed Successfully 🚀 ${primaryColor(packages)}\n`),
+    );
   }
 
   async runCommand(command: string) {
-    await execSync(command, { stdio: 'inherit' });
+    const stdout = await execSync(command);
+    return stdout.toString();
   }
 
   private async detectIsUsingNpm() {
