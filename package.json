@@ -43,8 +43,7 @@
     "@babel/runtime": "^7.16.7",
     "ansi-colors": "^4.1.1",
     "enquirer": "^2.3.6",
-    "fs-extra": "^10.0.0",
-    "nanospinner": "^1.0.0"
+    "fs-extra": "^10.0.0"
   },
   "devDependencies": {
     "@babel/cli": "^7.16.8",

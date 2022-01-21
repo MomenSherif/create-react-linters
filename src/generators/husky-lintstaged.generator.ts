@@ -20,6 +20,7 @@ export default async function huskyLintStagedConfigGenerator(
   const hasPrettier = installedPackages.includes('Prettier');
   const hasEslint = installedPackages.includes('Eslint');
   const hasStylelint = installedPackages.includes('Stylelint');
+  const hasCommitizen = installedPackages.includes('Commitizen');
 
   await fse.writeJSON(
     '.lintstagedrc.json',
@@ -50,11 +51,6 @@ export default async function huskyLintStagedConfigGenerator(
       'npx husky set .husky/commit-msg "npx --no -- commitlint --edit $1"',
     );
 
-  if (installedPackages.includes('Commitizen'))
-    await pkgManager.runCommand(
-      'npx husky set .husky/prepare-commit-msg "exec < /dev/tty && git cz --hook || true"',
-    );
-
   console.log(
     c.bold.blue('Husky & Lint-Staged successfully configured 🎉 🎉\n'),
   );
@@ -63,6 +59,7 @@ export default async function huskyLintStagedConfigGenerator(
     console.log(
       c.bold.cyan(
         `We added scripts for ${[
+          hasCommitizen && 'commit (to use commitizen)',
           hasEslint && 'eslint',
           hasStylelint && 'stylelint',
           hasPrettier && 'prettier',
