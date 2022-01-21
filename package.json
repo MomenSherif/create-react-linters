@@ -39,6 +39,10 @@
     "url": "https://github.com/MomenSherif/create-react-linters/issues"
   },
   "homepage": "https://github.com/MomenSherif/create-react-linters#readme",
+  "engines": {
+    "node": "^12.22.0 || ^14.17.0 || >=16.0.0",
+    "npm": ">=7.0.0"
+  },
   "dependencies": {
     "@babel/runtime": "^7.16.7",
     "ansi-colors": "^4.1.1",
