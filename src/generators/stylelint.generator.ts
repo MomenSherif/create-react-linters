@@ -11,12 +11,10 @@ export default async function stylelintConfigGenerator() {
 
   const isSCSS = await isUsingSCSS();
 
-  const packages = [
+  await pkgManager.addDevDeps([
     'stylelint',
     isSCSS ? 'stylelint-config-standard-scss' : 'stylelint-config-standard',
-  ];
-
-  await pkgManager.install(packages);
+  ]);
 
   const configurationPath = path.join(
     CONSTANTS.configFolder,
@@ -31,16 +29,15 @@ export default async function stylelintConfigGenerator() {
 
   await addScripts();
 
-  console.log(c.blue('Stylelint successfully configured 🎉 🎉'));
+  console.log(c.blue('\nStylelint successfully configured 🎉 🎉'));
 }
 
 async function addScripts() {
-  await Promise.all([
-    pkgManager.runCommand(
-      'npm set-script stylelint:check "stylelint **/*.{css,scss,sass} --ignore-path .gitignore --max-warnings 0"',
-    ),
-    pkgManager.runCommand(
-      'npm set-script stylelint:fix "stylelint **/*.{css,scss,sass} --fix --ignore-path .gitignore --max-warnings 0"',
-    ),
-  ]);
+  await pkgManager.addScripts({
+    'stylelint:check':
+      'stylelint **/*.{css,scss,sass} --ignore-path .gitignore --max-warnings 0',
+
+    'stylelint:fix':
+      'stylelint **/*.{css,scss,sass} --fix --ignore-path .gitignore --max-warnings 0',
+  });
 }

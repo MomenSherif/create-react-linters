@@ -5,7 +5,7 @@ import pkgManager from '@utils/pkgManager';
 export default async function commitlintConfigGenerator() {
   console.log(c.blue('\nConfiguring Commitlint 🔨 🔨'));
 
-  await pkgManager.install([
+  await pkgManager.addDevDeps([
     '@commitlint/cli',
     '@commitlint/config-conventional',
   ]);
@@ -18,5 +18,5 @@ export default async function commitlintConfigGenerator() {
     { spaces: 2 },
   );
 
-  console.log(c.blue('Commitlint successfully configured 🎉 🎉'));
+  console.log(c.blue('\nCommitlint successfully configured 🎉 🎉'));
 }

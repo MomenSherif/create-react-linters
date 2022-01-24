@@ -5,35 +5,33 @@ import c from 'ansi-colors';
 import CONSTANTS from '@constants';
 import isUsingTS from '@utils/isUsingTS';
 import pkgManager from '@utils/pkgManager';
+import { Packages } from '@types';
 
 export default async function eslintConfigGenerator() {
   console.log(c.blue('\nConfiguring Eslint 🔨 🔨'));
 
-  const packagesMap = await fetchEslintPackagesInfo();
-  const eslintPackages = Object.entries(packagesMap).map(
-    // get latest version ex: '^7.8.2 || ^8.2.4'
-    ([pkg, version]) => `${pkg}@${version.split('||').pop()?.trim()}`,
-  );
+  const isTypeScript = await isUsingTS();
 
-  // extend airbnb configuration
-  eslintPackages.unshift('eslint-config-airbnb');
-
-  // testing
-  eslintPackages.push(
+  const packages: Packages[] = [
+    'eslint',
+    'eslint-config-airbnb',
+    'eslint-plugin-import',
+    'eslint-plugin-jsx-a11y',
+    'eslint-plugin-react',
+    'eslint-plugin-react-hooks',
     'eslint-plugin-jest',
     'eslint-plugin-testing-library',
     'eslint-plugin-jest-dom',
-  );
+    ...((isTypeScript
+      ? [
+          '@typescript-eslint/parser',
+          '@typescript-eslint/eslint-plugin',
+          'eslint-config-airbnb-typescript',
+        ]
+      : []) as Packages[]),
+  ];
 
-  const isTypeScript = await isUsingTS();
-  if (isTypeScript)
-    eslintPackages.push(
-      '@typescript-eslint/parser',
-      '@typescript-eslint/eslint-plugin',
-      'eslint-config-airbnb-typescript',
-    );
-
-  await pkgManager.install(eslintPackages);
+  await pkgManager.addDevDeps(packages);
 
   const configurationPath = path.join(
     CONSTANTS.configFolder,
@@ -46,27 +44,15 @@ export default async function eslintConfigGenerator() {
 
   await addScripts();
 
-  console.log(c.blue('Eslint successfully configured 🎉 🎉'));
-}
-
-// detect all peerDependencies required versions for eslint-config-airbnb
-async function fetchEslintPackagesInfo(): Promise<Record<string, string>> {
-  const eslintPackagesString = await pkgManager.runCommand(
-    'npm info "eslint-config-airbnb@latest" peerDependencies',
-  );
-
-  return JSON.parse(
-    eslintPackagesString.replace(/'/g, '"').replace('eslint', '"eslint"'),
-  );
+  console.log(c.blue('\nEslint successfully configured 🎉 🎉'));
 }
 
 async function addScripts() {
-  await Promise.all([
-    pkgManager.runCommand(
-      'npm set-script eslint:check "eslint . --ext .js,.jsx,.ts,.tsx --ignore-path .gitignore --report-unused-disable-directives --max-warnings 0"',
-    ),
-    pkgManager.runCommand(
-      'npm set-script eslint:fix "eslint . --fix --ext .js,.jsx,.ts,.tsx --ignore-path .gitignore --report-unused-disable-directives --max-warnings 0"',
-    ),
-  ]);
+  await pkgManager.addScripts({
+    'eslint:check':
+      'eslint . --ext .js,.jsx,.ts,.tsx --ignore-path .gitignore --report-unused-disable-directives --max-warnings 0',
+
+    'eslint:fix':
+      'eslint . --fix --ext .js,.jsx,.ts,.tsx --ignore-path .gitignore --report-unused-disable-directives --max-warnings 0',
+  });
 }

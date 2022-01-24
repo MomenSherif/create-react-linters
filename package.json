@@ -41,14 +41,15 @@
   },
   "homepage": "https://github.com/MomenSherif/create-react-linters#readme",
   "engines": {
-    "node": "^12.22.0 || ^14.17.0 || >=16.0.0",
-    "npm": ">=7.0.0"
+    "node": "^12.22.0 || ^14.17.0 || >=16.0.0"
   },
   "dependencies": {
     "@babel/runtime": "^7.16.7",
+    "@npmcli/package-json": "^1.0.1",
     "ansi-colors": "^4.1.1",
     "enquirer": "^2.3.6",
-    "fs-extra": "^10.0.0"
+    "fs-extra": "^10.0.0",
+    "pretty-ms": "^7.0.1"
   },
   "devDependencies": {
     "@babel/cli": "^7.16.8",

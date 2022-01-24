@@ -1,6 +1,7 @@
 #!/usr/bin/env node
 
 import c from 'ansi-colors';
+import prettyMilliseconds from 'pretty-ms';
 
 import { availableConfigs } from '@configurations';
 import configListPrompt from '@prompts/config-list.prompt';
@@ -38,6 +39,8 @@ async function app() {
     configs = await configListPrompt();
   }
 
+  const start = performance.now();
+
   for (const config of configs) {
     const configGenerator = availableConfigs[config];
     await configGenerator();
@@ -45,7 +48,17 @@ async function app() {
 
   await huskyLintStagedConfigGenerator(configs);
 
-  console.log(`${c.yellow(`${c.bold('TA-DAAA')} 🎉 Enjoy Coding 👋`)}`);
+  const end = performance.now();
+
+  console.log(
+    `${c.yellow(
+      `${c.bold('TA-DAAA')} in ${prettyMilliseconds(
+        end - start,
+      )} 🎉 Enjoy Coding 👋`,
+    )}`,
+  );
+
+  console.log(c.blue('\nRun npm install'));
 }
 
 app().catch(e => {

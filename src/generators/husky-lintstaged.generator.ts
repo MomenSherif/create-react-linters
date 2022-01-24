@@ -9,12 +9,13 @@ export default async function huskyLintStagedConfigGenerator(
 ) {
   console.log(c.blue('\nConfiguring Husky & Lint-Staged 🔨 🔨'));
 
-  await pkgManager.install(['husky', 'lint-staged', 'is-ci', 'cross-env']);
+  await pkgManager.addDevDeps(['husky', 'lint-staged', 'is-ci', 'cross-env']);
 
   await pkgManager.runCommand('npx husky install');
-  await pkgManager.runCommand(
-    'npm set-script prepare "is-ci || husky install" ',
-  );
+
+  await pkgManager.addScripts({
+    prepare: 'is-ci || husky install',
+  });
 
   // lint-staged configuration
   const hasPrettier = installedPackages.includes('Prettier');
@@ -46,16 +47,17 @@ export default async function huskyLintStagedConfigGenerator(
     'npx husky set .husky/pre-commit "npx lint-staged"',
   );
 
-  if (installedPackages.includes('Commitlint'))
+  if (installedPackages.includes('Commitlint')) {
     await pkgManager.runCommand(
       'npx husky set .husky/commit-msg "npx --no -- commitlint --edit $1"',
     );
+  }
 
   console.log(
-    c.bold.blue('Husky & Lint-Staged successfully configured 🎉 🎉\n'),
+    c.bold.blue('\nHusky & Lint-Staged successfully configured 🎉 🎉\n'),
   );
 
-  if (hasEslint || hasStylelint || hasPrettier)
+  if (hasEslint || hasStylelint || hasPrettier || hasCommitizen) {
     console.log(
       c.bold.cyan(
         `We added scripts for ${[
@@ -68,4 +70,5 @@ export default async function huskyLintStagedConfigGenerator(
           .join(', ')} [check] & [fix] to use locally and in CI\n`,
       ),
     );
+  }
 }

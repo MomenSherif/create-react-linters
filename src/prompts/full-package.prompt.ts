@@ -1,6 +1,8 @@
 import { prompt } from 'enquirer';
 
-import { onCancel, prefix, styles, primaryColor } from '@prompts/shared';
+import {
+  onCancel, prefix, styles, primaryColor,
+} from '@prompts/shared';
 
 export default async function fullPackagePrompt() {
   const { isFullPackage } = await prompt<{ isFullPackage: boolean }>({

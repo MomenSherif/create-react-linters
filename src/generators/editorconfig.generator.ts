@@ -5,7 +5,7 @@ import c from 'ansi-colors';
 import CONSTANTS from '@constants';
 
 export default async function editorConfigGenerator() {
-  console.log(c.blue('\nConfiguring EditorConfig 🔨 🔨\n'));
+  console.log(c.blue('\nConfiguring EditorConfig 🔨 🔨'));
 
   const file = await fse.readFile(
     path.join(CONSTANTS.configFolder, '.editorconfig'),
@@ -13,5 +13,5 @@ export default async function editorConfigGenerator() {
 
   await fse.writeFile('.editorconfig', file);
 
-  console.log(c.blue('EditorConfig successfully configured 🎉 🎉'));
+  console.log(c.blue('\nEditorConfig successfully configured 🎉 🎉'));
 }

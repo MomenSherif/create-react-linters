@@ -8,7 +8,7 @@ import CONSTANTS from '@constants';
 export default async function prettierConfigGenerator() {
   console.log(c.blue('\nConfiguring Prettier 🔨 🔨'));
 
-  await pkgManager.install('prettier');
+  await pkgManager.addDevDeps(['prettier']);
 
   const file = await fse.readJSON(
     path.join(CONSTANTS.configFolder, 'prettier.json'),
@@ -25,23 +25,25 @@ export default async function prettierConfigGenerator() {
 
   await addScripts();
 
-  console.log(c.blue('Prettier successfully configured 🎉 🎉'));
+  console.log(c.blue('\nPrettier successfully configured 🎉 🎉'));
 }
 
 async function integratePrettierWithEslint() {
-  await pkgManager.install([
+  await pkgManager.addDevDeps([
     'eslint-config-prettier',
     'eslint-plugin-prettier',
   ]);
 
   const eslintConfig = await fse.readJSON('.eslintrc.json');
   // extend eslint-config-prettier
-  if (!eslintConfig.extends.some((config: string) => config === 'prettier'))
+  if (!eslintConfig.extends.some((config: string) => config === 'prettier')) {
     eslintConfig.extends.push('prettier');
+  }
 
   // add eslint-plugin-prettier
-  if (!eslintConfig.plugins.some((config: string) => config === 'prettier'))
+  if (!eslintConfig.plugins.some((config: string) => config === 'prettier')) {
     eslintConfig.plugins.push('prettier');
+  }
 
   eslintConfig.rules['prettier/prettier'] = 'error';
 
@@ -49,12 +51,16 @@ async function integratePrettierWithEslint() {
 }
 
 async function integreatePrettierWithStylelint() {
-  await pkgManager.install(['stylelint-config-prettier', 'stylelint-prettier']);
+  await pkgManager.addDevDeps([
+    'stylelint-config-prettier',
+    'stylelint-prettier',
+  ]);
 
   const stylelintConfig = await fse.readJSON('.stylelintrc.json');
 
-  if (!stylelintConfig.extends.includes('stylelint-config-prettier'))
+  if (!stylelintConfig.extends.includes('stylelint-config-prettier')) {
     stylelintConfig.extends.push('stylelint-config-prettier');
+  }
 
   stylelintConfig.plugins = stylelintConfig.plugins
     ? stylelintConfig.plugins.concat('stylelint-prettier')
@@ -66,12 +72,8 @@ async function integreatePrettierWithStylelint() {
 }
 
 async function addScripts() {
-  await Promise.all([
-    pkgManager.runCommand(
-      'npm set-script prettier:check "prettier . --check --ignore-unknown"',
-    ),
-    pkgManager.runCommand(
-      'npm set-script prettier:fix "prettier . --write --ignore-unknown"',
-    ),
-  ]);
+  await pkgManager.addScripts({
+    'prettier:check': 'prettier . --check --ignore-unknown',
+    'prettier:fix': 'prettier . --write --ignore-unknown',
+  });
 }
