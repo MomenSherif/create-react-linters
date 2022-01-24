@@ -1,5 +1,5 @@
 ## Create React Linters 🚀
-Setup all linters you like and don't let 💩 slip into your code base!
+Setup all the linters you like and don't let 💩 slip into your code base!
 
 [Eslint](https://eslint.org/) 
 | [Stylelint](https://stylelint.io/)
@@ -10,10 +10,10 @@ Setup all linters you like and don't let 💩 slip into your code base!
 
 
 <p align="center">
-  <img height="250" src="https://user-images.githubusercontent.com/52167824/150801732-025d68f8-6c70-482f-b1b3-a8042e3fcdb1.PNG">
+  <img src="https://user-images.githubusercontent.com/52167824/150801732-025d68f8-6c70-482f-b1b3-a8042e3fcdb1.PNG">
 </p>
 
-## Useage
+## Usage
 Prerequisites:
  - [Node.js](https://nodejs.org/) (`^12.22.0`, `^14.17.0`, or `>=16.0.0`)
  - Project initialized with `git` and `package.json`
@@ -23,7 +23,7 @@ npx create-react-linters@latest
 ```
 ## 🎯 Eslint
 **Find and fix problems in your JavaScript code.**\
-we are extending `airbnb` configurations. no extra rules are added.
+We are extending `airbnb` configurations. No extra rules are added.
 ### Provided:
 - [eslint-config-airbnb](https://www.npmjs.com/package/eslint-config-airbnb)
 - [eslint-config-airbnb-typescript](https://www.npmjs.com/package/eslint-config-airbnb-typescript) `Typescript Only`
@@ -48,7 +48,7 @@ npm run eslint:fix
 
 ## ✨ Stylelint
 **A mighty, modern linter that helps you avoid errors and enforce conventions in your styles.**\
-we are extending `standard` configurations. no extra rules are added.
+We are extending `standard` configurations. No extra rules are added.
 
 ### Provided:
 - [stylelint-config-standard](https://www.npmjs.com/package/stylelint-config-standard)
@@ -64,8 +64,8 @@ npm run stylelint:fix
 
 
 ## ✨ Commitlint
-**Helps your team adhering to a commit convention. By supporting npm-installed configurations it makes sharing of commit conventions easy.**\
-we are extending `config-conventional` configurations. no extra rules are added.\
+**Helps your team to adhere to a commit convention. By supporting npm-installed configurations, it makes sharing of commit conventions easy.**\
+We are extending `config-conventional` configurations. No extra rules are added.
 
 > Learn more about conventional commits. [here](https://www.conventionalcommits.org/)
 
@@ -75,7 +75,7 @@ we are extending `config-conventional` configurations. no extra rules are added.
 
 ## 💄 Prettier
 **An opinionated code formatter**\
-`.prettierrc.json` is created with some configurations, feel free to update them.\
+`.prettierrc.json` is created with some configurations, feel free to update them.
 
 > Learn more about prettier options. [here](https://prettier.io/docs/en/options.html)
 
@@ -96,16 +96,16 @@ npm run prettier:fix
 
 ## 📃 EditorConfig
 **Maintain consistent coding styles for multiple developers working on the same project across various editors and IDEs.**\
-Default `.editorconfig` generated file is used\
+Default `.editorconfig` generated file is used.
 
 
 ## 💻 Commitizen
-**When you commit with Commitizen, you'll be prompted to fill out any required commit fields at commit time.**\
+**When you commit with Commitizen, you'll be prompted to fill out any required commit fields at commit time.**
 ```sh
 npm run commit
 ```
 
 ## 🐶 Husky & Lint-Staged
-**Run linters against staged git files and don't let  💩  slip into your code base!**\
+**Run linters against staged git files and don't let  💩  slip into your code base!**
 > pre-commit | eslint, stylelint and prettier
 > commit | commitlint
