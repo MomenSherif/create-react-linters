@@ -63,7 +63,7 @@ npm run stylelint:fix
 ```
 
 
-## ✨ Commitlint
+## 🛑 Commitlint
 **Helps your team to adhere to a commit convention. By supporting npm-installed configurations, it makes sharing of commit conventions easy.**\
 We are extending `config-conventional` configurations. No extra rules are added.
 
