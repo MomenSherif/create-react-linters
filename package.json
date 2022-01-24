@@ -1,6 +1,6 @@
 {
   "name": "create-react-linters",
-  "version": "0.2.1",
+  "version": "0.2.2",
   "description": "setup all linters you like for your react app in 1 minute 🚀",
   "main": "dist/index.js",
   "bin": "dist/index.js",
