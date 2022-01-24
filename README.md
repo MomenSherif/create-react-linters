@@ -10,7 +10,7 @@ Setup all linters you like and don't let 💩 slip into your code base!
 
 
 <p align="center">
-  <img src="https://user-images.githubusercontent.com/52167824/150801732-025d68f8-6c70-482f-b1b3-a8042e3fcdb1.PNG">
+  <img height="250" src="https://user-images.githubusercontent.com/52167824/150801732-025d68f8-6c70-482f-b1b3-a8042e3fcdb1.PNG">
 </p>
 
 ## Useage
